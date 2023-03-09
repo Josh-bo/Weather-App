@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.css">
+</head>
+<body onload="getLoc()">
+    <style>
+        body{
+            background-image: url(/Images/thunder.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        input{
+            background-color: transparent;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            outline: none;
+        }
+    </style>
+
+
+
+    <div class="container">
+        <div class="text-light mt-4">
+            Check out your city, your country, your state and some other's weather here 
+        </div>
+        <div class="row ps-5 pe-5 pt-3">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <b class="fs-1 text-light" id="degg">0 <sup>o</sup>C</b>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-6 text-center mt-5 pt-5">
+                <span class="text-light">Do not put space before, middle or after your searching word </span><br>
+                <input type="text" class="mt-5 my-3 text-light text-center" placeholder="Find here" id="UserFind"> <br>
+                <button class="btn btn-success" onclick="gweda()">GET WEATHER</button>
+
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-4 text-light text-center mt-3 border rounded p-4">
+               
+            <span>Name:</span><span id="nm" class="mx-2"></span><hr>
+            <span>Latitude:</span><span id="latt" class="mx-2"></span><hr>
+            <span>Longtitude:</span><span id="long" class="mx-2"></span><hr>
+            <span>Temperature:</span><span id="tem" class="mx-2"></span><hr>
+            <span>Pressure:</span><span id="pre" class="mx-2"></span><hr>
+            <span>Country:</span><span id="con" class="mx-2"></span><hr>
+            <span>Sunrise:</span><span id="sunr" class="mx-2"></span><hr>
+            <span>Sunset:</span><span id="suns" class="mx-2"></span><hr>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gweda = async () => {
+            
+                let APIkey = '2d2a783eb9fdeffced418e609ace367e'
+                let endPoint = `https://api.openweathermap.org/data/2.5/weather?q=${UserFind.value}&appid=${APIkey}$units=metric`
+    
+                let response = await fetch(endPoint)
+                let convert = await response.json()
+                console.log(convert)
+                
+    
+                let getit = convert.wind.deg
+                console.log(getit)
+                degg.innerHTML = `${getit}<sup>o</sup>C`
+
+                let getnm = convert.name
+                nm.innerHTML = `${getnm}`
+
+                let getlat = convert.coord.lat
+                latt.innerHTML = `${getlat}`
+
+                let getlong = convert.coord.lon
+                long.innerHTML = `${getlong}`
+
+                let gettem = convert.main.temp
+                tem.innerHTML = `${gettem}`
+
+                let getpre = convert.main.pressure
+                pre.innerHTML = `${getpre}`
+
+                let getcon = convert.sys.country
+                con.innerHTML = `${getcon}`
+
+                let getrise = convert.sys.sunrise
+                sunr.innerHTML = `${getrise}`
+
+                let getset = convert.sys.sunset
+                suns.innerHTML = `${getset}`
+           
+    }
+
+        const getLoc = () => {
+                    navigator.geolocation.getCurrentPosition((getLocation) => {
+                        console.log(location)
+                        let lat = location.coords.latitude
+                        let log = location.coords.longitude
+                        console.log(latitude,longitude)
+
+
+                        let endPoint3 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}`
+
+                        fetch(endPoint3)
+                        .then((response) => response.json())
+                        .then((convertedResponse) => {
+                            console.log(convertedResponse)
+                        })
+                    })
+
+            }
+    </script>
+</body> 
+</html>
