@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7523148153263124"
+     crossorigin="anonymous"></script>
 </head>
 <body onload="getLoc()" class="pb-5">
     <style>
@@ -73,7 +75,7 @@
             <span>Name:</span><span id="nm" class="mx-2"></span><hr>
             <span>Country:</span><span id="con" class="mx-2"></span><hr>
             <span>Latitude:</span><span id="latt" class="mx-2"></span><hr>
-            <span>Longtitude:</span><span id="long" class="mx-2"></span><hr>
+            <span>Longitude:</span><span id="long" class="mx-2"></span><hr>
             <span>Temperature:</span><span id="tem" class="mx-2"></span><hr>
             <span>Pressure:</span><span id="pre" class="mx-2"></span><hr>
             <span>Sunrise:</span><span id="sunr" class="mx-2"></span><hr>
@@ -91,7 +93,7 @@
                 let response = await fetch(endPoint)
                 let convert = await response.json()
                 console.log(convert)
-                UserFind.value = ""
+                UserFind.value = "" 
                 
     
                 let getit = convert.wind.deg
